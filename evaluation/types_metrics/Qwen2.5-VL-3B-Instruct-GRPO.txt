@@ -1,0 +1,44 @@
+Qwen2.5-VL-3B-Instruct-GRPO:
+web
+sm_score_wo_d  : 0.3057
+mm_score_Vec   : 0.9535
+mm_score_Dir   : 0.6701
+mm_score_Len   : 0.9431
+mm_score_Pos   : 0.8280
+sed_score      : 7.2025
+stde_score     : 0.8404
+ss_score       : 0.2679
+CC             : 0.3505
+AUC            : 0.7200
+NSS            : 1.2991
+sAUC           : 0.6124
+
+
+desktop
+sm_score_wo_d  : 0.3069
+mm_score_Vec   : 0.9496
+mm_score_Dir   : 0.6537
+mm_score_Len   : 0.9379
+mm_score_Pos   : 0.8212
+sed_score      : 6.4935
+stde_score     : 0.8419
+ss_score       : 0.2665
+CC             : 0.3634
+AUC            : 0.7181
+NSS            : 1.2901
+sAUC           : 0.6370
+
+
+mobile
+sm_score_wo_d  : 0.3317
+mm_score_Vec   : 0.9440
+mm_score_Dir   : 0.7031
+mm_score_Len   : 0.9230
+mm_score_Pos   : 0.8599
+sed_score      : 5.3191
+stde_score     : 0.8631
+ss_score       : 0.3414
+CC             : 0.3869
+AUC            : 0.7371
+NSS            : 1.2530
+sAUC           : 0.6171

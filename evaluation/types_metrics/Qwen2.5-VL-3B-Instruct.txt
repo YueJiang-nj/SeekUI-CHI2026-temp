@@ -1,0 +1,44 @@
+Qwen2.5-VL-3B-Instruct:
+web
+sm_score_wo_d  : 0.2575
+mm_score_Vec   : 0.9334
+mm_score_Dir   : 0.6664
+mm_score_Len   : 0.9213
+mm_score_Pos   : 0.8021
+sed_score      : 8.3544
+stde_score     : 0.8066
+ss_score       : 0.2752
+CC             : 0.2950
+AUC            : 0.6885
+NSS            : 1.0710
+sAUC           : 0.6006
+
+
+desktop
+sm_score_wo_d  : 0.2592
+mm_score_Vec   : 0.9376
+mm_score_Dir   : 0.6308
+mm_score_Len   : 0.9219
+mm_score_Pos   : 0.7963
+sed_score      : 7.4935
+stde_score     : 0.8155
+ss_score       : 0.2521
+CC             : 0.3068
+AUC            : 0.6846
+NSS            : 1.0283
+sAUC           : 0.6071
+
+
+mobile
+sm_score_wo_d  : 0.2713
+mm_score_Vec   : 0.9291
+mm_score_Dir   : 0.6770
+mm_score_Len   : 0.9194
+mm_score_Pos   : 0.8271
+sed_score      : 6.0745
+stde_score     : 0.8317
+ss_score       : 0.3161
+CC             : 0.3143
+AUC            : 0.7227
+NSS            : 0.9505
+sAUC           : 0.6117

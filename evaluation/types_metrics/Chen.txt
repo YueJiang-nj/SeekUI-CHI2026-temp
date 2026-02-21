@@ -1,0 +1,44 @@
+Chen:
+web
+sm_score_wo_d  : 0.1613
+mm_score_Vec   : 0.8576
+mm_score_Dir   : 0.6441
+mm_score_Len   : 0.7828
+mm_score_Pos   : 0.7213
+sed_score      : 15.2658
+stde_score     : 0.7402
+ss_score       : 0.2032
+CC             : 0.0824
+AUC            : 0.5882
+NSS            : 0.3445
+sAUC           : 0.5581
+
+
+desktop
+sm_score_wo_d  : 0.1262
+mm_score_Vec   : 0.8466
+mm_score_Dir   : 0.6098
+mm_score_Len   : 0.7605
+mm_score_Pos   : 0.6878
+sed_score      : 16.8182
+stde_score     : 0.7118
+ss_score       : 0.1855
+CC             : 0.0225
+AUC            : 0.5191
+NSS            : 0.1271
+sAUC           : 0.5026
+
+
+mobile
+sm_score_wo_d  : 0.1398
+mm_score_Vec   : 0.8484
+mm_score_Dir   : 0.6172
+mm_score_Len   : 0.7852
+mm_score_Pos   : 0.7160
+sed_score      : 15.3936
+stde_score     : 0.7341
+ss_score       : 0.2066
+CC             : 0.0612
+AUC            : 0.5437
+NSS            : 0.2217
+sAUC           : 0.5121
