@@ -24,7 +24,7 @@ This repository contains the official implementation of the paper **"SeekUI: Pre
 
 ## 🚀 TODO List
 - [ ] Release the paper.
-- [ ] Release the training and inference code.
+- [x] Release the training and inference code.
 - [ ] Release the pre-trained checkpoints and the processed data.
 
 ## 📖 Citation
