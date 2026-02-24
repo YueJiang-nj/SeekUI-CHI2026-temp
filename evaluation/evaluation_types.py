@@ -1,4 +1,5 @@
 import json
+import argparse
 import os.path
 
 from evaluation.evaluator import Evaluator
@@ -239,8 +240,13 @@ def filter_predictions(predictions, img2type, required_type):
     return new_predictions
 
 
-test_predictions = json.load(open("test_predictions_qwen.json"))
-img2type = json.load(open("/l/dataset/VIS_GUI/dataset/img_to_type.json"))
+parser = argparse.ArgumentParser(description="Evaluate scanpath predictions by type")
+parser.add_argument("--prediction_file", type=str, default="test_predictions_SeekUI.json", help="Path to the prediction JSON file")
+parser.add_argument("--img2type_file", type=str, default="/l/dataset/VIS_GUI/dataset/img_to_type.json", help="Path to the img_to_type JSON file")
+args = parser.parse_args()
+
+test_predictions = json.load(open(args.prediction_file))
+img2type = json.load(open(args.img2type_file))
 
 
 web_predictions = filter_predictions(test_predictions, img2type, "web")

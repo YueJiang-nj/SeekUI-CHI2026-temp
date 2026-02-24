@@ -70,7 +70,7 @@ def compute_clusters(gt_scanpaths):
 fixation_root = '.'
 processed_root = '.'
 
-test_json_data = os.path.join(fixation_root, 'test_predictions.json')
+test_json_data = os.path.join(fixation_root, 'test_predictions_SeekUI.json')
 test_fixations = json.load(open(test_json_data, "r"))
 
 train_json_data = os.path.join(fixation_root, 'train_scanpath.json')

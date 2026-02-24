@@ -1,4 +1,5 @@
 import json
+import argparse
 from evaluation.evaluator import Evaluator
 import numpy as np
 
@@ -227,7 +228,11 @@ def process_predictions(raw_predictions):
     return predictions, ground_truths, fixation_infos
 
 
-test_predictions = json.load(open("test_predictions_qwen_think.json"))
+parser = argparse.ArgumentParser(description="Evaluate scanpath predictions")
+parser.add_argument("--prediction_file", type=str, default="test_predictions_SeekUI.json", help="Path to the prediction JSON file")
+args = parser.parse_args()
+
+test_predictions = json.load(open(args.prediction_file))
 test_prediction_form(test_predictions)
 
 
