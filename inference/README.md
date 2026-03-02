@@ -17,16 +17,16 @@ Runs scanpath prediction **with** an explanation step. The model is prompted to 
 ### Inference without Explanation
 
 ```bash
-python prediction.py 
-    --model_path yourpath/SeekUI_no_explain 
+python prediction.py \
+    --model_path /path/to/SeekUI_no_explain \
     --output test_predictions_SeekUI_sft.json
 ```
 
 ### Inference with Explanation
 
 ```bash
-python prediction_think.py 
-    --model_path yourpath/SeekUI 
+python prediction_think.py \
+    --model_path /path/to/SeekUI \
     --output test_predictions_SeekUI.json
 ```
 
@@ -41,11 +41,11 @@ Both scripts share the same set of command-line arguments:
 |---|---|---|---|
 | `--model_path` | `str` | *(see below)* | Path to the pretrained model checkpoint |
 | `--cache_dir` | `str` | *(optional)* | Cache directory for the model |
-| `--scanpath_train` | `str` | `yourpath/scanpath_train.json` | Path to the training scanpath JSON file |
-| `--scanpath_test` | `str` | `yourpath/scanpath_test.json` | Path to the cached test scanpath JSON file |
-| `--target2text` | `str` | `yourpath/target2text.json` | Path to the target-to-text mapping JSON |
-| `--test_data_path` | `str` | `yourpath/length20_test_text.csv` | Path to the test CSV data file |
-| `--image_root` | `str` | `yourpath/dataset` | Root directory for images |
+| `--scanpath_train` | `str` | `/path/to/scanpath_train.json` | Path to the training scanpath JSON file |
+| `--scanpath_test` | `str` | `/path/to/scanpath_test.json` | Path to the cached test scanpath JSON file |
+| `--target2text` | `str` | `/path/to/target2text.json` | Path to the target-to-text mapping JSON |
+| `--test_data_path` | `str` | `/path/to/length20_test_text.csv` | Path to the test CSV data file |
+| `--image_root` | `str` | `/path/to/dataset` | Root directory for images |
 | `--output` | `str` | *(see below)* | Path to the output prediction JSON file |
 | `--max_new_tokens` | `int` | *(see below)* | Maximum number of new tokens to generate |
 
