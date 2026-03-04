@@ -439,7 +439,7 @@ class LazySupervisedDataset(Dataset):
                 scanpath[img_usr_tgt]["t"].append(t)
 
         scanpath = list(scanpath.values())
-        json.dump(scanpath, open("./scanpath_train.json", "w"), indent=4)
+        # json.dump(scanpath, open("PATH_TO_DATA/scanpath_train.json", "w"), indent=4)
         return scanpath
 
     def get_data(self, sources) -> Dict[str, torch.Tensor]:
