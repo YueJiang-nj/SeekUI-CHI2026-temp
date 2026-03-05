@@ -20,12 +20,115 @@
 ## 🏠 Abstract
 This repository contains the official implementation of the paper **"SeekUI: Predicting Visual Search Behavior on Graphical User Interfaces with a Reward-Augmented Vision Language Model"**.
 
+## 🗂️ Model Zoo
 
+We provide pre-trained model checkpoints on Hugging Face:
+
+| Model | Description | Link |
+|-------|-------------|------|
+| **SeekUI-SFT** | SFT model (Stage 1) | [🤗 sushizixin1/SeekUI_sft](https://huggingface.co/sushizixin1/SeekUI_sft) |
+| **SeekUI** | RL-trained model (Stage 2) | [🤗 sushizixin1/SeekUI](https://huggingface.co/sushizixin1/SeekUI) |
+
+## ⚡ Quick Start: Single Image Inference
+
+Below is a minimal example to predict a visual search scanpath on a single GUI screenshot using SeekUI.
+
+```python
+from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
+from qwen_vl_utils import process_vision_info
+import torch
+import re
+
+# Load model and processor
+model_path = "sushizixin1/SeekUI"  # or "sushizixin1/SeekUI_sft" for the SFT model
+model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+    model_path,
+    torch_dtype=torch.bfloat16,
+    attn_implementation="flash_attention_2",
+    device_map="auto",
+)
+processor = AutoProcessor.from_pretrained(model_path)
+
+# Prepare input
+image_path = "path/to/your/gui_screenshot.png"
+image_width, image_height = 1920, 1080  # actual image dimensions
+target_text = "Submit"  # text on the target UI element
+
+messages = [
+    {
+        "role": "user",
+        "content": [
+            {
+                "type": "text",
+                "text": (
+                    f'Given the image with width {image_width} and height {image_height}, '
+                    f'what is the scanpath for the visual search task on this GUI? '
+                    f'The text on the target element is "{target_text}".\n'
+                    f'Output the thinking process in <think> </think> and final answer in <answer> </answer> tags. '
+                    f'The output answer format should be as follows:\n'
+                    f'<think> ... </think> <answer>The scanpath is [x1, y1] [x2, y2] ...</answer>\n'
+                    f'Please strictly follow the format.\n'
+                ),
+            },
+            {
+                "type": "image",
+                "image": image_path,
+            },
+        ],
+    }
+]
+
+# Run inference
+text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+image_inputs, video_inputs = process_vision_info(messages)
+inputs = processor(
+    text=[text],
+    images=image_inputs,
+    videos=video_inputs,
+    padding=True,
+    return_tensors="pt",
+).to("cuda")
+
+with torch.no_grad():
+    generated_ids = model.generate(**inputs, max_new_tokens=512, do_sample=False)
+
+generated_ids_trimmed = [
+    out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
+]
+output_text = processor.batch_decode(
+    generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+)
+content = output_text[0]
+
+# Parse output
+think_match = re.search(r'<think>(.*?)</think>', content)
+thinking = think_match.group(1).strip() if think_match else ""
+
+answer_match = re.search(r'<answer>(.*?)</answer>', content)
+scanpath_text = answer_match.group(1).strip() if answer_match else content.strip()
+
+# Extract scanpath coordinates
+points = re.findall(r'\[(\d+)\s*[\s,]\s*(\d+)\]', scanpath_text)
+scanpath = [[int(x), int(y)] for x, y in points]
+
+print("Thinking:", thinking)
+print("Scanpath:", scanpath)
+```
+
+> **Note:** For batch inference on the full test set, refer to [`inference/prediction_think.py`](inference/prediction_think.py).
 
 ## 🚀 TODO List
 - [ ] Release the paper.
 - [x] Release the training and inference code.
-- [ ] Release the pre-trained checkpoints and the processed data.
+- [x] Release the pre-trained checkpoints and the processed data.
+
+## 🙏 Acknowledgement
+
+We sincerely thank the following open-source projects that have greatly contributed to this work:
+
+- [Qwen2.5-VL](https://github.com/QwenLM/Qwen3-VL): The base vision-language model used in SeekUI.
+- [Visual RFT](https://github.com/Liuziyu77/Visual-RFT): Inspiring the reward-augmented reinforcement learning approach.
+- [GazeXplain](https://github.com/chenxy99/GazeXplain): Providing insights into gaze prediction and explanation.
 
 ## 📖 Citation
 If you find our work or this repository useful, please consider citing our paper:

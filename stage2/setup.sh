@@ -14,7 +14,7 @@ module load cuda
 
 source activate /scratch/cs/imagedb/picsom/databases/vsgui/env/Visual-RFT
 
-cd src/virft
+cd src/seekui
 pip install -e ".[dev]"
 
 # Addtional modules
