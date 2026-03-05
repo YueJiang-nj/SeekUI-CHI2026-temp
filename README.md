@@ -29,6 +29,17 @@ We provide pre-trained model checkpoints on Hugging Face:
 | **SeekUI-SFT** | SFT model (Stage 1) | [🤗 sushizixin1/SeekUI_sft](https://huggingface.co/sushizixin1/SeekUI_sft) |
 | **SeekUI** | RL-trained model (Stage 2) | [🤗 sushizixin1/SeekUI](https://huggingface.co/sushizixin1/SeekUI) |
 
+## 📦 Installation
+
+Install the required dependencies for inference:
+
+```bash
+pip install torch transformers accelerate qwen-vl-utils Pillow
+pip install flash-attn --no-build-isolation
+```
+
+> **Note:** `flash-attn` requires a CUDA-compatible GPU and may take some time to compile. Make sure your CUDA toolkit version is compatible with your PyTorch installation.
+
 ## ⚡ Quick Start: Single Image Inference
 
 Below is a minimal example to predict a visual search scanpath on a single GUI screenshot using SeekUI.
