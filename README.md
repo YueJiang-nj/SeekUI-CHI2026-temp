@@ -40,6 +40,13 @@ pip install flash-attn --no-build-isolation
 
 > **Note:** `flash-attn` requires a CUDA-compatible GPU and may take some time to compile. Make sure your CUDA toolkit version is compatible with your PyTorch installation.
 
+Install the required dependencies for training:
+
+```bash
+cd stage2
+bash setup.sh
+```
+
 ## ⚡ Quick Start: Single Image Inference
 
 Below is a minimal example to predict a visual search scanpath on a single GUI screenshot using SeekUI.
@@ -126,7 +133,27 @@ print("Thinking:", thinking)
 print("Scanpath:", scanpath)
 ```
 
-> **Note:** For batch inference on the full test set, refer to [`inference/prediction_think.py`](inference/prediction_think.py).
+> **Note:** For inference on the full test set, refer to [`Inference`](inference/README.md).
+
+## 📁 Data Preparation
+
+Please refer to [`data/Data.md`](data/Data.md) for detailed instructions on downloading the dataset and formatting guidelines for both training stages.
+
+## 🏋️ Training
+
+### Stage 1: Instruction Tuning (SFT)
+The training script for Stage 1 is located at `stage1/qwen-vl-finetune/run_eye_tracking.sh`:
+```bash
+cd stage1/qwen-vl-finetune
+bash run_eye_tracking.sh
+```
+
+### Stage 2: Reinforcement Learning (RLVR)
+The training script for Stage 2 is located at `stage2/src/seekui/run_eye_tracking.sh`:
+```bash
+cd stage2/src/seekui
+bash run_eye_tracking.sh
+```
 
 ## 🚀 TODO List
 - [ ] Release the paper.
@@ -142,4 +169,4 @@ We sincerely thank the following open-source projects that have greatly contribu
 - [GazeXplain](https://github.com/chenxy99/GazeXplain): Providing insights into gaze prediction and explanation.
 
 ## 📖 Citation
-If you find our work or this repository useful, please consider citing our paper:
+If you find our work or this repository useful, please consider citing our paper.
