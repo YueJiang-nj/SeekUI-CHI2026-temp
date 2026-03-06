@@ -155,6 +155,10 @@ cd stage2/src/seekui
 bash run_eye_tracking.sh
 ```
 
+## 📊 Evaluation
+
+Please refer to [`evaluation/README.md`](evaluation/README.md) for detailed instructions on running scanpath prediction evaluations, analyzing per-type metrics, and downloading baseline model predictions.
+
 ## 🚀 TODO List
 - [ ] Release the paper.
 - [x] Release the training and inference code.
