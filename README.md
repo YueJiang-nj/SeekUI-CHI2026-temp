@@ -56,6 +56,7 @@ from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 import torch
 import re
+from PIL import Image
 
 # Load model and processor
 model_path = "sushizixin1/SeekUI"  # or "sushizixin1/SeekUI_sft" for the SFT model
@@ -69,8 +70,10 @@ processor = AutoProcessor.from_pretrained(model_path)
 
 # Prepare input
 image_path = "path/to/your/gui_screenshot.png"
-image_width, image_height = 1920, 1080  # actual image dimensions
-target_text = "Submit"  # text on the target UI element
+
+img = Image.open(image_path)
+image_width, image_height = img.size   # actual image dimensions
+target_text = "Submit"   # text on the target UI element
 
 messages = [
     {
