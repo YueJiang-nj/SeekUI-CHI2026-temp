@@ -74,7 +74,7 @@ model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
 processor = AutoProcessor.from_pretrained(model_path)
 
 # Prepare input
-image_path = "path/to/your/gui_screenshot.png"
+image_path = "demo/c3f5f9.png"
 
 img = Image.open(image_path)
 image_width, image_height = img.size   # actual image dimensions
