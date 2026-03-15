@@ -32,9 +32,12 @@ We provide pre-trained model checkpoints on Hugging Face:
 
 ## 📦 Installation
 
-The environment for both inference and training (Stage 1 & Stage 2) is now unified. You can install all required dependencies using:
+The environment for both inference and training (Stage 1 & Stage 2) is now unified. We recommend using Conda to manage your environment:
 
 ```bash
+conda create -n seekui python=3.10.12 -y
+conda activate seekui
+
 pip install vllm==0.7.1
 pip install datasets==4.0.0
 pip install math-verify==0.8.0
