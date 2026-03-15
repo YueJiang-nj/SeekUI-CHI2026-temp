@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=project_462001077
+#SBATCH --account=project_
 #SBATCH --partition=standard-g
 #SBATCH --nodes=8
 #SBATCH --ntasks-per-node=1
@@ -7,18 +7,14 @@
 #SBATCH --gpus-per-node=8
 #SBATCH --mem-per-cpu=8000
 #SBATCH --time=00:20:00
-#SBATCH --output=Eye-tracking-RFT-Qwen2.5-think-test.out
+#SBATCH --output=SeekUI.out
 
 export RDZV_HOST=$(hostname)
 export RDZV_PORT=29400
 
-module purge
-module use /appl/local/csc/modulefiles
-module load pytorch/2.5
-
-export PYTHONUSERBASE=/scratch/project_462000803/zixin/RFT_env
-export HF_HOME=/scratch/project_462000803/zixin/RFT_env
-export TORCH_HOME=/scratch/project_462000803/zixin/RFT_env
+export PYTHONUSERBASE=/path/to/RFT_env
+export HF_HOME=/path/to/RFT_env
+export TORCH_HOME=/path/to/RFT_env
 
 export DIR_PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PYTHONPATH="$PYTHONPATH:$DIR_PWD"
@@ -28,13 +24,13 @@ echo $PYTHONPATH
 export OMP_NUM_THREADS=7
 export PYTHONUNBUFFERED=1
 
-export DATA_PATH=/scratch/project_462000803/zixin/data/vis_gui_train_dataset/vis_gui_train_qwen_sft_think
-export CKPT_PATH=/scratch/project_462000803/zixin/RFT_env/model/checkpoints_nlp_full_think
-export SAVE_PATH=./share_models/Qwen2.5-VL-3B-Instruct_GRPO_visgui_think_re
-export WANDB_API_KEY=bf8ca0549e275efca1c336d0c11a2ef64949212d
+export DATA_PATH=/path/to/data/vsgui_train_seekui_qwen2_5_explanation
+export CKPT_PATH=/path/to/model/SeekUI_sft
+export SAVE_PATH=./share_models/SeekUI
+export WANDB_API_KEY=your_wandb_api_key
 
 export DEBUG_MODE="true"
-export LOG_PATH="./GRPO_visgui_test.txt"
+export LOG_PATH="./SeekUI.txt"
 
 srun python -m torch.distributed.run \
 --nnodes=$SLURM_JOB_NUM_NODES \
@@ -57,7 +53,7 @@ src/open_r1/grpo.py \
 --attn_implementation flash_attention_2 \
 --max_pixels 401408 \
 --num_train_epochs 30 \
---run_name Qwen2.5-VL-3B_GRPO_visgui_think_re \
+--run_name SeekUI \
 --save_steps 500 \
 --save_only_model true \
 --num_generations 4 \

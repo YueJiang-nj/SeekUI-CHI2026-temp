@@ -1,0 +1,14 @@
+pip install vllm==0.7.1
+pip install datasets==4.0.0
+pip install math-verify==0.8.0
+pip install trl==0.15.0
+pip install matplotlib==3.10.0
+pip install scipy==1.13.1
+pip install mergekit
+pip install llm_blender
+pip install transformers==4.55.0
+pip install deepspeed==0.16.2
+pip install scikit-learn
+pip install wandb==0.21.0
+pip install flash-attn==2.7.4.post1 --no-build-isolation
+pip install transformers==4.51.1
