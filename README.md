@@ -26,8 +26,8 @@ We provide pre-trained model checkpoints on Hugging Face:
 
 | Model | Description | Link |
 |-------|-------------|------|
-| **SeekUI-SFT** | SFT model (Stage 1) | [🤗 sushizixin1/SeekUI_sft](https://huggingface.co/sushizixin1/SeekUI_sft) |
-| **SeekUI** | RL-trained model (Stage 2) | [🤗 sushizixin1/SeekUI](https://huggingface.co/sushizixin1/SeekUI) |
+| **SeekUI-SFT** | Instruction Tuning (Stage 1) | [🤗 sushizixin1/SeekUI_sft](https://huggingface.co/sushizixin1/SeekUI_sft) |
+| **SeekUI** | Reinforcement Learning after Stage 1 (Stage 2) | [🤗 sushizixin1/SeekUI](https://huggingface.co/sushizixin1/SeekUI) |
 
 ## 📦 Installation
 
@@ -157,7 +157,11 @@ bash run_eye_tracking.sh
 ```
 
 ### Stage 2: Reinforcement Learning (RLVR)
-The training script for Stage 2 is located at `stage2/src/seekui/run_eye_tracking.sh`:
+The training script for Stage 2 is located at `stage2/src/seekui/run_eye_tracking.sh`. 
+
+> [!IMPORTANT]
+> Before running Stage 2, you must ensure that the model checkpoint generated from Stage 1 (Instruction Tuning) is available at the path specified in the training script (e.g., `/path/to/model/SeekUI_sft`).
+
 ```bash
 cd stage2/src/seekui
 bash run_eye_tracking.sh
