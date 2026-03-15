@@ -15,7 +15,7 @@ qwenvl/train/train_qwen.py \
 --tune_mm_vision False \
 --tune_mm_mlp True \
 --dataset_use $DATASETS \
---output_dir /path/to/SeekUI_sft \
+--output_dir /path/to/model/SeekUI_sft \
 --cache_dir $CACHE_DIR \
 --bf16 \
 --per_device_train_batch_size 8 \
