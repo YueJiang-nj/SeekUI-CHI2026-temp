@@ -19,7 +19,7 @@ import torch
 from torch.utils.data import Dataset
 from PIL import Image
 from decord import VideoReader
-from torchcodec.decoders import VideoDecoder
+# from torchcodec.decoders import VideoDecoder
 import transformers
 
 from . import data_list
@@ -32,8 +32,7 @@ IMAGE_TOKEN_INDEX = 151655
 VIDEO_TOKEN_INDEX = 151656
 DEFAULT_IMAGE_TOKEN = "<image>"
 DEFAULT_VIDEO_TOKEN = "<video>"
-# POINT_START_TOKEN_INDEX = 151665
-# POINT_END_TOKEN_INDEX = 151666
+
 
 local_rank = None
 

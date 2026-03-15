@@ -3,10 +3,10 @@ import re
 # Define placeholders for dataset paths
 
 VSGUI_TEXT = {
-    # "annotation_path": "PATH_TO_DATA/fixations/length20_train_text.csv",
-    "annotation_path": "PATH_TO_DATA/data/scanpath_train_explanation.json",
-    "data_path": "PATH_TO_DATA/data",
-    "target": "PATH_TO_DATA/data/target2text.json",
+    # "annotation_path": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui/length20_train_text.csv",
+    "annotation_path": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui/scanpath_train.json",
+    "data_path": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui",
+    "target": "/mnt/tidal-alsh-share2/dataset/csa_ali/guozixin/test_seekui/vsgui/target2text.json",
 }
 
 data_dict = {

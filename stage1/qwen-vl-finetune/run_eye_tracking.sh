@@ -1,25 +1,11 @@
 #!/bin/bash
-#SBATCH --gres=gpu:1
-#SBATCH --ntasks=1
-#SBATCH --mem=400G
-#SBATCH --cpus-per-task=4
-#SBATCH --time=12:00:00
-#SBATCH --constraint=hopper
-#SBATCH --partition=gpu-h200-141g-short
-#SBATCH --output=seekui-sft.out
-
-module load mamba
-module load triton/2025.1-gcc
-module load cuda
-
-source activate /scratch/work/guoz3/environment/qwen
 
 export PYTHONUNBUFFERED=1
-export HF_HOME=/scratch/work/guoz3/environment/qwen
-export TORCH_HOME=/scratch/work/guoz3/environment/qwen
+export HF_HOME=/path/to/qwen
+export TORCH_HOME=/path/to/qwen
 
 MODEL_PATH="Qwen/Qwen2.5-VL-3B-Instruct"
-CACHE_DIR="/scratch/work/guoz3/environment/qwen/hub"
+CACHE_DIR="/path/to/qwen/hub"
 DATASETS="vsgui_text%100"
 
 python -m torch.distributed.run --nproc_per_node=1 --master_port=4622 \
@@ -29,7 +15,7 @@ qwenvl/train/train_qwen.py \
 --tune_mm_vision False \
 --tune_mm_mlp True \
 --dataset_use $DATASETS \
---output_dir /scratch/cs/imagedb/picsom/databases/vsgui/zixin/checkpoints_seekui_sft \
+--output_dir /path/to/SeekUI_sft \
 --cache_dir $CACHE_DIR \
 --bf16 \
 --per_device_train_batch_size 8 \
@@ -57,5 +43,3 @@ qwenvl/train/train_qwen.py \
 --save_total_limit 3 \
 --dataloader_num_workers 4 \
 --deepspeed ./scripts/zero3.json \
-
-source deactivate

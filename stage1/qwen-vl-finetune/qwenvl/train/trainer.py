@@ -16,8 +16,8 @@ from transformers.models.qwen2_vl.modeling_qwen2_vl import (
     Qwen2VisionTransformerPretrainedModel,
     Qwen2VLModel,
 )
+from transformers.pytorch_utils import ALL_LAYERNORM_LAYERS
 from transformers.trainer import (
-    ALL_LAYERNORM_LAYERS,
     get_parameter_names,
     has_length,
     is_sagemaker_mp_enabled,
@@ -183,30 +183,72 @@ def print_trainable_parameters(self) -> None:
     Prints the trainable status of all LLM components including embeddings, layers, and normalization.
     Outputs the indices of trainable/non-trainable layers and other module statuses.
     """
-    # Check embed_tokens
-    is_embed_trainable = any(
-        param.requires_grad for param in self.embed_tokens.parameters()
-    )
+
+    # 获取语言模型部分
+    lm = self.language_model if hasattr(self, "language_model") else self
+
+    # -------- embed tokens --------
+    embed = lm.get_input_embeddings()
+    is_embed_trainable = any(param.requires_grad for param in embed.parameters())
     print(f"LLM Module - Embed Tokens Trainable: {is_embed_trainable}")
 
-    # Check each decoder layer
+    # -------- decoder layers --------
+    layers = None
+    if hasattr(lm, "layers"):
+        layers = lm.layers
+    elif hasattr(lm, "model") and hasattr(lm.model, "layers"):
+        layers = lm.model.layers
+    else:
+        raise ValueError("Cannot find decoder layers in the model.")
+
     trainable_layers = []
     non_trainable_layers = []
 
-    for layer_idx, layer in enumerate(self.layers):
+    for layer_idx, layer in enumerate(layers):
         is_trainable = any(param.requires_grad for param in layer.parameters())
         if is_trainable:
             trainable_layers.append(layer_idx)
         else:
             non_trainable_layers.append(layer_idx)
 
-    # Print layer status
     print(
         f"LLM Module - Trainable Layer Indices: {trainable_layers if trainable_layers else 'None'}"
     )
     print(
         f"LLM Module - Non-Trainable Layer Indices: {non_trainable_layers if non_trainable_layers else 'None'}"
     )
+
+
+# def print_trainable_parameters(self) -> None:
+#     """
+#     Prints the trainable status of all LLM components including embeddings, layers, and normalization.
+#     Outputs the indices of trainable/non-trainable layers and other module statuses.
+#     """
+    
+#     # Check embed_tokens
+#     is_embed_trainable = any(
+#         param.requires_grad for param in self.embed_tokens.parameters()
+#     )
+#     print(f"LLM Module - Embed Tokens Trainable: {is_embed_trainable}")
+
+#     # Check each decoder layer
+#     trainable_layers = []
+#     non_trainable_layers = []
+
+#     for layer_idx, layer in enumerate(self.layers):
+#         is_trainable = any(param.requires_grad for param in layer.parameters())
+#         if is_trainable:
+#             trainable_layers.append(layer_idx)
+#         else:
+#             non_trainable_layers.append(layer_idx)
+
+#     # Print layer status
+#     print(
+#         f"LLM Module - Trainable Layer Indices: {trainable_layers if trainable_layers else 'None'}"
+#     )
+#     print(
+#         f"LLM Module - Non-Trainable Layer Indices: {non_trainable_layers if non_trainable_layers else 'None'}"
+#     )
 
 
 def create_optimizer(self):

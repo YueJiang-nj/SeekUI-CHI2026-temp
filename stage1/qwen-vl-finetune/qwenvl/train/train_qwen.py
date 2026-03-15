@@ -35,7 +35,6 @@ from transformers import (
     Qwen2VLForConditionalGeneration,
     Qwen2_5_VLForConditionalGeneration,
 )
-from qwenvl.data.data_qwen import make_supervised_data_module
 from qwenvl.data.data_qwen_eye_tracking import make_supervised_data_module_packed
 from qwenvl.train.argument import (
     ModelArguments,
@@ -148,8 +147,6 @@ def train(attn_implementation="flash_attention_2"):
         use_fast=False,
     )
 
-    # tokenizer.add_special_tokens({"additional_special_tokens": ["<|point_start|>", "<|point_end|>"]})
-
     set_model(model_args, model)
 
     if torch.distributed.get_rank() == 0:
@@ -159,7 +156,7 @@ def train(attn_implementation="flash_attention_2"):
     if data_args.data_packing:
         data_module = make_supervised_data_module_packed(tokenizer=tokenizer, data_args=data_args)
     else:
-        data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
+        raise NotImplementedError
     trainer = Trainer(
         model=model, processing_class=tokenizer, args=training_args, **data_module
     )
