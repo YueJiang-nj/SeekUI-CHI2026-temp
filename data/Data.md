@@ -132,7 +132,7 @@ Please strictly follow the format.
 
     This reads `scanpath_train.json`, converts each sample to GRPO format, and saves to `./vis_gui_train/`.
 
-Alternatively, download the pre-processed dataset directly from HuggingFace: [sushizixin1/vsgui_train_seekui_qwen2.5_explanation](https://huggingface.co/datasets/sushizixin1/vsgui_train_seekui_qwen2.5_explanation).
+Alternatively, download the pre-processed dataset directly from HuggingFace: [sushizixin1/vsgui_train_seekui_qwen2_5_explanation](https://huggingface.co/datasets/sushizixin1/vsgui_train_seekui_qwen2_5_explanation).
 
 
 ### Supported Dataset Formats
