@@ -145,7 +145,7 @@ print("Scanpath:", scanpath)
 
 ## 📁 Data Preparation
 
-Please refer to [`data/Data.md`](data/Data.md) for detailed instructions on downloading the dataset and formatting guidelines for both training stages.
+Please refer to [`data/README.md`](data/README.md) for detailed instructions on downloading the dataset and formatting guidelines for both training stages.
 
 ## 🏋️ Training
 
