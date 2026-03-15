@@ -141,7 +141,7 @@ print("Thinking:", thinking)
 print("Scanpath:", scanpath)
 ```
 
-> **Note:** For inference on the full test set, refer to [`Inference`](inference/README.md).
+> **Note:** For inference on the full test set, refer to [`Inference`](inference/README.md). For detailed evaluation and metrics, please see the [Evaluation](#-evaluation) section below.
 
 ## 📁 Data Preparation
 
