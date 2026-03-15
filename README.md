@@ -31,21 +31,26 @@ We provide pre-trained model checkpoints on Hugging Face:
 
 ## 📦 Installation
 
-Install the required dependencies for inference:
+The environment for both inference and training (Stage 1 & Stage 2) is now unified. You can install all required dependencies using:
 
 ```bash
-pip install torch transformers accelerate qwen-vl-utils Pillow
-pip install flash-attn --no-build-isolation
+pip install vllm==0.7.1
+pip install datasets==4.0.0
+pip install math-verify==0.8.0
+pip install trl==0.15.0
+pip install matplotlib==3.10.0
+pip install scipy==1.13.1
+pip install mergekit
+pip install llm_blender
+pip install transformers==4.55.0
+pip install deepspeed==0.16.2
+pip install scikit-learn
+pip install wandb==0.21.0
+pip install flash-attn==2.7.4.post1 --no-build-isolation
+pip install transformers==4.51.1
 ```
 
 > **Note:** `flash-attn` requires a CUDA-compatible GPU and may take some time to compile. Make sure your CUDA toolkit version is compatible with your PyTorch installation.
-
-Install the required dependencies for training:
-
-```bash
-cd stage2
-bash setup.sh
-```
 
 ## ⚡ Quick Start: Single Image Inference
 
